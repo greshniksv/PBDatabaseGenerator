@@ -6,9 +6,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>815</width>
-    <height>439</height>
+    <width>987</width>
+    <height>700</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>987</width>
+    <height>700</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>987</width>
+    <height>700</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>UserForm</string>
@@ -17,8 +29,8 @@
    <widget class="QPushButton" name="btnAddMetodata">
     <property name="geometry">
      <rect>
-      <x>270</x>
-      <y>30</y>
+      <x>950</x>
+      <y>280</y>
       <width>31</width>
       <height>23</height>
      </rect>
@@ -31,7 +43,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>10</y>
+      <y>260</y>
       <width>251</width>
       <height>16</height>
      </rect>
@@ -44,17 +56,17 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>30</y>
-      <width>256</width>
-      <height>231</height>
+      <y>280</y>
+      <width>931</width>
+      <height>341</height>
      </rect>
     </property>
    </widget>
    <widget class="QPushButton" name="btnRemoveMetodata">
     <property name="geometry">
      <rect>
-      <x>270</x>
-      <y>60</y>
+      <x>950</x>
+      <y>310</y>
       <width>31</width>
       <height>23</height>
      </rect>
@@ -66,8 +78,8 @@
    <widget class="QLabel" name="label_11">
     <property name="geometry">
      <rect>
-      <x>330</x>
-      <y>270</y>
+      <x>470</x>
+      <y>10</y>
       <width>441</width>
       <height>61</height>
      </rect>
@@ -88,8 +100,8 @@
    <widget class="QGroupBox" name="groupBox">
     <property name="geometry">
      <rect>
-      <x>330</x>
-      <y>30</y>
+      <x>10</x>
+      <y>10</y>
       <width>441</width>
       <height>231</height>
      </rect>
@@ -156,7 +168,7 @@
       <string>Name*</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="txbSlug">
+    <widget class="QLineEdit" name="txbName">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -166,7 +178,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QLineEdit" name="txbPermalink">
+    <widget class="QLineEdit" name="txbUserState">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -202,7 +214,7 @@
       <string>Comment*</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="txbCreatedBy">
+    <widget class="QLineEdit" name="txbComment">
      <property name="geometry">
       <rect>
        <x>150</x>
@@ -225,7 +237,7 @@
       <string>IsAdmin</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="txbAllowedChildren">
+    <widget class="QLineEdit" name="txbIsAdmin">
      <property name="geometry">
       <rect>
        <x>150</x>
@@ -251,7 +263,7 @@
       <string>ApplicationName*</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="txbTitle">
+    <widget class="QLineEdit" name="txbApplicationName">
      <property name="geometry">
       <rect>
        <x>150</x>
@@ -277,7 +289,7 @@
       <string>ProviderName*</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="txbIsPublished">
+    <widget class="QLineEdit" name="txbProviderName">
      <property name="geometry">
       <rect>
        <x>150</x>
@@ -287,7 +299,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QLineEdit" name="txbIsPublished_2">
+    <widget class="QLineEdit" name="txbProviderUserKey">
      <property name="geometry">
       <rect>
        <x>290</x>
@@ -313,7 +325,7 @@
       <string>ProviderUserKey</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="txbIsPublished_3">
+    <widget class="QLineEdit" name="txbPassword">
      <property name="geometry">
       <rect>
        <x>290</x>
@@ -340,13 +352,39 @@
      </property>
     </widget>
    </widget>
+   <widget class="QPushButton" name="btnSave">
+    <property name="geometry">
+     <rect>
+      <x>770</x>
+      <y>650</y>
+      <width>171</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Save</string>
+    </property>
+   </widget>
+   <widget class="Line" name="line">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>630</y>
+      <width>991</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>815</width>
+     <width>987</width>
      <height>21</height>
     </rect>
    </property>
