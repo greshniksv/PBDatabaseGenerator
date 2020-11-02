@@ -15,6 +15,8 @@ class Ui_Data(object):
     def setupUi(self, Data):
         Data.setObjectName("Data")
         Data.resize(401, 285)
+        Data.setMinimumSize(QtCore.QSize(401, 285))
+        Data.setMaximumSize(QtCore.QSize(401, 285))
         self.btnBox = QtWidgets.QDialogButtonBox(Data)
         self.btnBox.setGeometry(QtCore.QRect(10, 230, 371, 32))
         self.btnBox.setOrientation(QtCore.Qt.Horizontal)

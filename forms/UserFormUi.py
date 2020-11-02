@@ -14,7 +14,9 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_UserForm(object):
     def setupUi(self, UserForm):
         UserForm.setObjectName("UserForm")
-        UserForm.resize(987, 724)
+        UserForm.resize(987, 700)
+        UserForm.setMinimumSize(QtCore.QSize(987, 700))
+        UserForm.setMaximumSize(QtCore.QSize(987, 700))
         self.centralwidget = QtWidgets.QWidget(UserForm)
         self.centralwidget.setObjectName("centralwidget")
         self.btnAddMetodata = QtWidgets.QPushButton(self.centralwidget)

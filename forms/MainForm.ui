@@ -50,7 +50,7 @@
      </rect>
     </property>
     <property name="value">
-     <number>24</number>
+     <number>0</number>
     </property>
    </widget>
    <widget class="Line" name="line">
@@ -312,9 +312,9 @@
       </rect>
      </property>
      <property name="title">
-      <string>Configuration</string>
+      <string>Template</string>
      </property>
-     <widget class="QPushButton" name="pushButton">
+     <widget class="QPushButton" name="btnSaveTemplate">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -327,7 +327,7 @@
        <string>Save</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton_3">
+     <widget class="QPushButton" name="btnLoadTemplate">
       <property name="geometry">
        <rect>
         <x>180</x>
@@ -341,6 +341,62 @@
       </property>
      </widget>
     </widget>
+   </widget>
+   <widget class="QLabel" name="label_7">
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>170</y>
+      <width>141</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Consolas</family>
+      <pointsize>8</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Connection to database:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lblVerifyConnection">
+    <property name="geometry">
+     <rect>
+      <x>520</x>
+      <y>170</y>
+      <width>81</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Consolas</family>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color : transparent; color : rgb(129, 129, 129);</string>
+    </property>
+    <property name="text">
+     <string>not verified</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnVerifyConnection">
+    <property name="geometry">
+     <rect>
+      <x>674</x>
+      <y>170</y>
+      <width>121</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Verify connection</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
