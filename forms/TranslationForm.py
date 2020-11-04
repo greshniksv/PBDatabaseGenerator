@@ -11,10 +11,11 @@ from PyQt5.QtGui import QIcon
 
 
 class TranslationForm(QtWidgets.QMainWindow, Ui_TranslationForm):
-    def __init__(self):
+    def __init__(self, parent):
         # Это здесь нужно для доступа к переменным, методам
         # и т.д. в файле design.py
         super().__init__()
+        self.parent_form = parent
         self.setupUi(self)
         self.translation_model = None
         self.model = QStandardItemModel()
@@ -75,6 +76,7 @@ class TranslationForm(QtWidgets.QMainWindow, Ui_TranslationForm):
             QMessageBox.about(self, 'Error message', 'An exception occurred: {}'.format(err))
 
         if error_acquire is False:
+            self.parent_form.set_translation(self.translation_model)
             self.close()
 
     def remove_metadata(self):
@@ -98,6 +100,3 @@ class TranslationForm(QtWidgets.QMainWindow, Ui_TranslationForm):
                     ])
         except BaseException as err:
             QMessageBox.about(self, 'PyQt5 message', 'An exception occurred: {}'.format(err))
-
-    def get_translation_model(self):
-        return self.translation_model

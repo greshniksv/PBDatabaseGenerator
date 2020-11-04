@@ -5,6 +5,7 @@ from forms.MainForm import MainForm
 
 def main():
     app = QtWidgets.QApplication(sys.argv)
+    app.setStyle('Fusion')
     window = MainForm()
     window.show()
     app.exec_()

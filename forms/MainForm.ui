@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>811</width>
-    <height>336</height>
+    <height>324</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -72,7 +72,7 @@
       <x>370</x>
       <y>10</y>
       <width>431</width>
-      <height>151</height>
+      <height>181</height>
      </rect>
     </property>
     <property name="title">
@@ -174,13 +174,36 @@
      <property name="geometry">
       <rect>
        <x>220</x>
-       <y>120</y>
+       <y>140</y>
        <width>181</width>
        <height>21</height>
       </rect>
      </property>
      <property name="text">
       <string>Trusted Connection</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="cbDataSources">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>140</y>
+       <width>181</width>
+       <height>22</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_8">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>120</y>
+       <width>71</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Data Source</string>
      </property>
     </widget>
    </widget>
@@ -201,7 +224,7 @@
       <rect>
        <x>190</x>
        <y>30</y>
-       <width>101</width>
+       <width>71</width>
        <height>16</height>
       </rect>
      </property>
@@ -211,15 +234,15 @@
       </font>
      </property>
      <property name="text">
-      <string>Translation set:</string>
+      <string>Translation:</string>
      </property>
     </widget>
     <widget class="QLabel" name="lblTranslation">
      <property name="geometry">
       <rect>
-       <x>290</x>
+       <x>270</x>
        <y>30</y>
-       <width>31</width>
+       <width>51</width>
        <height>16</height>
       </rect>
      </property>
@@ -230,18 +253,18 @@
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color : transparent; color : geen;</string>
+      <string notr="true">color : rgb(129, 129, 129);</string>
      </property>
      <property name="text">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#03bd00;&quot;&gt;OK&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string>not set</string>
      </property>
     </widget>
     <widget class="QLabel" name="lblUser">
      <property name="geometry">
       <rect>
-       <x>290</x>
+       <x>270</x>
        <y>70</y>
-       <width>31</width>
+       <width>51</width>
        <height>16</height>
       </rect>
      </property>
@@ -252,18 +275,18 @@
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color : transparent; color : geen;</string>
+      <string notr="true">color : rgb(129, 129, 129);</string>
      </property>
      <property name="text">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#03bd00;&quot;&gt;OK&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string>not set</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_6">
      <property name="geometry">
       <rect>
-       <x>190</x>
+       <x>200</x>
        <y>70</y>
-       <width>101</width>
+       <width>61</width>
        <height>16</height>
       </rect>
      </property>
@@ -272,8 +295,14 @@
        <family>Consolas</family>
       </font>
      </property>
+     <property name="layoutDirection">
+      <enum>Qt::LeftToRight</enum>
+     </property>
      <property name="text">
-      <string>User set:</string>
+      <string>User:</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
     </widget>
     <widget class="QPushButton" name="btnConfigureTranslation">
@@ -306,9 +335,9 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>150</y>
+       <y>140</y>
        <width>331</width>
-       <height>51</height>
+       <height>61</height>
       </rect>
      </property>
      <property name="title">
@@ -318,7 +347,7 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>20</y>
+        <y>30</y>
         <width>141</width>
         <height>23</height>
        </rect>
@@ -331,7 +360,7 @@
       <property name="geometry">
        <rect>
         <x>180</x>
-        <y>20</y>
+        <y>30</y>
         <width>141</width>
         <height>23</height>
        </rect>
@@ -346,7 +375,7 @@
     <property name="geometry">
      <rect>
       <x>370</x>
-      <y>170</y>
+      <y>200</y>
       <width>141</width>
       <height>16</height>
      </rect>
@@ -367,7 +396,7 @@
     <property name="geometry">
      <rect>
       <x>520</x>
-      <y>170</y>
+      <y>200</y>
       <width>81</width>
       <height>16</height>
      </rect>
@@ -379,17 +408,17 @@
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color : transparent; color : rgb(129, 129, 129);</string>
+     <string notr="true">color : rgb(129, 129, 129);</string>
     </property>
     <property name="text">
-     <string>not verified</string>
+     <string>not tested</string>
     </property>
    </widget>
    <widget class="QPushButton" name="btnVerifyConnection">
     <property name="geometry">
      <rect>
-      <x>674</x>
-      <y>170</y>
+      <x>670</x>
+      <y>200</y>
       <width>121</width>
       <height>23</height>
      </rect>
