@@ -7,6 +7,8 @@ from PyQt5.QtWidgets import QApplication, QWidget, QInputDialog, QMessageBox, QF
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from Services.WorkerService import WorkerService
+from models.TranslationModel import TranslationModel
+import json
 
 
 class MainForm(QtWidgets.QMainWindow, Ui_MainForm):
@@ -25,63 +27,57 @@ class MainForm(QtWidgets.QMainWindow, Ui_MainForm):
         self.btnExecute.clicked.connect(self.execute)
         self.btnSaveTemplate.clicked.connect(self.save_template)
         self.btnLoadTemplate.clicked.connect(self.load_template)
-        self.btnVerifyConnection.clicked.connect(self.test)
+        self.btnVerifyConnection.clicked.connect(self.test_connection)
         drivers = SqlService.drivers()
         for i in range(len(drivers)):
             self.cbDataSources.addItem(drivers[i])
 
-    def thread_complete(self):
-        self.lblVerifyConnection.setStyleSheet("color : grey;")
-        self.lblVerifyConnection.setText("Compl")
+    def test_connection(self):
+        def result(r):
+            self.lblVerifyConnection.setStyleSheet("color : grey;")
+            self.lblVerifyConnection.setText("success")
+            print(r)
 
-    def result(self, r):
-        self.lblVerifyConnection.setStyleSheet("color : grey;")
-        self.lblVerifyConnection.setText("result")
+        def error(r):
+            self.lblVerifyConnection.setStyleSheet("color : red;")
+            self.lblVerifyConnection.setText("error")
 
-    def result22(self, r):
-        self.lblVerifyConnection.setStyleSheet("color : grey;")
-        self.lblVerifyConnection.setText("error")
+        def verify_connection():
+            self.lblVerifyConnection.setStyleSheet("color : green;")
+            self.lblVerifyConnection.setText("executing...")
+            service = SqlService(
+                driver=self.cbDataSources.currentText(),
+                server=self.txbServer.text(),
+                database=self.txbDatabase.text(),
+                user=self.txbUser.text(),
+                password=self.txbPassword.text(),
+                trust=self.cbTrustedConnection.isChecked()
+            )
+            return service.test_connection()
 
-    def test(self):
-        # Pass the function to execute
-        worker = WorkerService(self.verify_connection)
-        worker.signals.result.connect(self.result)
-        #worker.signals.finished.connect(self.thread_complete)
-        worker.signals.error.connect(self.result22)
-        #worker.signals.progress.connect(self.progress_fn)
+        worker = WorkerService(verify_connection)
+        worker.signals.result.connect(result)
+        # worker.signals.finished.connect(self.thread_complete)
+        worker.signals.error.connect(error)
+        # worker.signals.progress.connect(self.progress_fn)
 
         # Execute
         self.thread_pool.start(worker)
 
-    def verify_connection(self):
-        self.lblVerifyConnection.setStyleSheet("color : grey;")
-        self.lblVerifyConnection.setText("not tested")
-
-        service = SqlService(
-            driver=self.cbDataSources.currentText(),
-            server=self.txbServer.text(),
-            database=self.txbDatabase.text(),
-            user=self.txbUser.text(),
-            password=self.txbPassword.text(),
-            trust=self.cbTrustedConnection.isChecked()
-        )
-
-        # try:
-        result = service.test_connection()
-        if result is True:
-            self.lblVerifyConnection.setStyleSheet("color : green;")
-            self.lblVerifyConnection.setText("Success")
-        # except BaseException as e:
-        #     self.lblVerifyConnection.setStyleSheet("color : red;")
-        #     self.lblVerifyConnection.setText("Error")
-        #     QMessageBox.about(self, 'Error message', '{}'.format(e))
-
     def save_template(self):
         options = QFileDialog.Options()
         options |= QFileDialog.DontUseNativeDialog
-        files, _ = QFileDialog.getOpenFileNames(self, "QFileDialog.getOpenFileNames()", "",
+        file, _ = QFileDialog.getSaveFileName(self, "QFileDialog.getOpenFileNames()", "",
                                                 "Json Files (*.json)", options=options)
         # TODO:Save template
+        if len(file) > 0:
+            if not file.endswith(".json"):
+                file += ".json"
+            with open(file, 'w') as f:
+                json_data = json.dumps(self.translation_model.__dict__)
+                f.write(json_data)
+        else:
+            QMessageBox.about(self, 'Error message', 'Files was not selected')
 
     def load_template(self):
         options = QFileDialog.Options()
@@ -89,7 +85,12 @@ class MainForm(QtWidgets.QMainWindow, Ui_MainForm):
         files, _ = QFileDialog.getOpenFileNames(self, "QFileDialog.getOpenFileNames()", "",
                                                 "Json Files (*.json)", options=options)
         # TODO:Load template
-        # if len(files) > 0:
+        if len(files) > 0:
+            with open(files[0], 'r') as f:
+                json_data = f.read()
+                self.translation_model = TranslationModel(**json.loads(json_data))
+        else:
+            QMessageBox.about(self, 'Error message', 'Files was not selected')
 
     def execute(self):
         model = self.translation_model
