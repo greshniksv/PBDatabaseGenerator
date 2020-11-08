@@ -8,6 +8,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from Services.WorkerService import WorkerService
 from models.TranslationModel import TranslationModel
+from models.UserModel import UserModel
 import json
 
 
@@ -68,13 +69,17 @@ class MainForm(QtWidgets.QMainWindow, Ui_MainForm):
         options = QFileDialog.Options()
         options |= QFileDialog.DontUseNativeDialog
         file, _ = QFileDialog.getSaveFileName(self, "QFileDialog.getOpenFileNames()", "",
-                                                "Json Files (*.json)", options=options)
+                                              "Json Files (*.json)", options=options)
         # TODO:Save template
         if len(file) > 0:
             if not file.endswith(".json"):
                 file += ".json"
             with open(file, 'w') as f:
-                json_data = json.dumps(self.translation_model.__dict__)
+                models = {
+                    'translation': self.translation_model.__dict__,
+                    'user': (self.user_model.__dict__ if self.user_model is not None else None)
+                }
+                json_data = json.dumps(models)
                 f.write(json_data)
         else:
             QMessageBox.about(self, 'Error message', 'Files was not selected')
@@ -88,7 +93,16 @@ class MainForm(QtWidgets.QMainWindow, Ui_MainForm):
         if len(files) > 0:
             with open(files[0], 'r') as f:
                 json_data = f.read()
-                self.translation_model = TranslationModel(**json.loads(json_data))
+                data = json.loads(json_data)
+                if data['translation'] is not None:
+                    self.translation_model = TranslationModel(**data['translation'])
+                    self.lblTranslation.setStyleSheet("color : green;")
+                    self.lblTranslation.setText("OK")
+
+                if data['user'] is not None:
+                    self.user_model = UserModel(**data['user'])
+                    self.lblUser.setStyleSheet("color : green;")
+                    self.lblUser.setText("OK")
         else:
             QMessageBox.about(self, 'Error message', 'Files was not selected')
 
@@ -108,9 +122,15 @@ class MainForm(QtWidgets.QMainWindow, Ui_MainForm):
     def open_translation(self):
         self.trans_form.setParent(self)
         self.trans_form.setWindowFlag(QtCore.Qt.Window)
+        if self.translation_model is not None:
+            self.trans_form.translation_model = self.translation_model
+            self.trans_form.apply_model()
         self.trans_form.show()
 
     def open_user(self):
         self.user_form.setParent(self)
         self.user_form.setWindowFlag(QtCore.Qt.Window)
+        if self.user_model is not None:
+            self.user_form.user_model = self.user_model
+            self.user_form.apply_model()
         self.user_form.show()

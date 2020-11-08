@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_TranslationForm(object):
     def setupUi(self, TranslationForm):
         TranslationForm.setObjectName("TranslationForm")
-        TranslationForm.resize(985, 700)
+        TranslationForm.resize(985, 715)
         TranslationForm.setMinimumSize(QtCore.QSize(985, 700))
         TranslationForm.setMaximumSize(QtCore.QSize(985, 715))
         self.centralwidget = QtWidgets.QWidget(TranslationForm)

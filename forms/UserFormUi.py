@@ -14,9 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_UserForm(object):
     def setupUi(self, UserForm):
         UserForm.setObjectName("UserForm")
-        UserForm.resize(987, 700)
-        UserForm.setMinimumSize(QtCore.QSize(987, 700))
-        UserForm.setMaximumSize(QtCore.QSize(987, 700))
+        UserForm.resize(987, 725)
         self.centralwidget = QtWidgets.QWidget(UserForm)
         self.centralwidget.setObjectName("centralwidget")
         self.btnAddMetodata = QtWidgets.QPushButton(self.centralwidget)
@@ -106,7 +104,7 @@ class Ui_UserForm(object):
         self.label_12.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.label_12.setObjectName("label_12")
         self.btnSave = QtWidgets.QPushButton(self.centralwidget)
-        self.btnSave.setGeometry(QtCore.QRect(770, 650, 171, 23))
+        self.btnSave.setGeometry(QtCore.QRect(770, 660, 171, 23))
         self.btnSave.setObjectName("btnSave")
         self.line = QtWidgets.QFrame(self.centralwidget)
         self.line.setGeometry(QtCore.QRect(0, 630, 991, 21))

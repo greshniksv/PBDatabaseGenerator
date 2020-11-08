@@ -1,13 +1,13 @@
-from .UserForm import UserForm
 from .TranslationFormUi import Ui_TranslationForm
-from .MetadataForm import MetadataWidget
-from PyQt5 import QtWidgets, QtCore
+from PyQt5 import QtWidgets
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
-from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QMessageBox
+from PyQt5.QtWidgets import QFileDialog
+from PyQt5.QtWidgets import QMessageBox
+from pydantic import ValidationError
+
 from models.TranslationModel import TranslationModel
-from pydantic import BaseModel, ValidationError, validator
-from PyQt5.QtWidgets import QApplication, QWidget, QInputDialog, QLineEdit, QFileDialog
-from PyQt5.QtGui import QIcon
+from .MetadataForm import MetadataWidget
+from .TranslationFormUi import Ui_TranslationForm
 
 
 class TranslationForm(QtWidgets.QMainWindow, Ui_TranslationForm):
@@ -29,6 +29,41 @@ class TranslationForm(QtWidgets.QMainWindow, Ui_TranslationForm):
         self.btnRemoveMetodata.clicked.connect(self.remove_metadata)
         self.btnSave.clicked.connect(self.save)
         self.btnBrowseFile.clicked.connect(self.open_file_names_dialog)
+        self.setFixedSize(self.width(), self.height()-20)
+
+    def apply_model(self):
+        model = self.translation_model
+        self.txbLangId.setText(model.language)
+        self.txbDraftBy.setText(model.draft_by)
+        self.txbSlug.setText(model.slug)
+        self.txbPermalink.setText(model.permalink)
+        self.txbCreatedBy.setText(model.created_by)
+        self.txbAllowedChildren.setText(model.allowed_children)
+        self.txbTitle.setText(model.title)
+        self.txbIsPublished.setText(model.is_published)
+        self.txbFile.setText(model.file)
+
+        # Clear
+        while self.model.rowCount() > 0:
+            self.model.removeRow(0)
+
+        for item in model.metadata:
+            self.model.appendRow(
+                [
+                    QStandardItem(item['name']),
+                    QStandardItem(item['value']),
+                    QStandardItem(item['type']),
+                    QStandardItem('MetaData')
+                ])
+
+        for item in model.content_data:
+            self.model.appendRow(
+                [
+                    QStandardItem(item['name']),
+                    QStandardItem(item['value']),
+                    QStandardItem(item['type']),
+                    QStandardItem('ContentData')
+                ])
 
     def open_file_names_dialog(self):
         options = QFileDialog.Options()
@@ -39,7 +74,6 @@ class TranslationForm(QtWidgets.QMainWindow, Ui_TranslationForm):
             self.txbFile.setText(files[0])
 
     def save(self):
-        error_acquire = False
         try:
             metadata = []
             content_data = []
@@ -67,6 +101,8 @@ class TranslationForm(QtWidgets.QMainWindow, Ui_TranslationForm):
                 metadata=metadata,
                 content_data=content_data
             )
+            self.parent_form.set_translation(self.translation_model)
+
         except ValidationError as e:
             error_acquire = True
             QMessageBox.about(self, 'Error message', '{}'.format(e))
@@ -75,9 +111,7 @@ class TranslationForm(QtWidgets.QMainWindow, Ui_TranslationForm):
             error_acquire = True
             QMessageBox.about(self, 'Error message', 'An exception occurred: {}'.format(err))
 
-        if error_acquire is False:
-            self.parent_form.set_translation(self.translation_model)
-            self.close()
+        self.close()
 
     def remove_metadata(self):
         indexes = self.tvMetadata.selectedIndexes()

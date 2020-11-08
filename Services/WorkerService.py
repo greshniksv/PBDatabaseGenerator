@@ -1,10 +1,7 @@
-from PyQt5.QtGui import *
-from PyQt5.QtWidgets import *
+import sys
+import traceback
 from PyQt5.QtCore import *
 from .WorkerSignals import WorkerSignals
-
-import time
-import traceback, sys
 
 
 class WorkerService(QRunnable):
