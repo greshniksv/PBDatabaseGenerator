@@ -124,7 +124,6 @@ class TranslationForm(QtWidgets.QMainWindow, Ui_TranslationForm):
             result = dialog.exec_()
             if result == 1:
                 data = dialog.return_data()
-                # TODO: Make 'row_type' read only
                 self.model.appendRow(
                     [
                         QStandardItem(data['name']),
